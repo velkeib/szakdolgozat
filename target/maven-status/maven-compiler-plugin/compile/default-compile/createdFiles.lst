@@ -1,0 +1,7 @@
+hello\WebSecurityConfig.class
+hello\Entity\User.class
+hello\AppController.class
+hello\security\MyUserDetailsService.class
+hello\Entity\User$Role.class
+hello\repository\UserRepository.class
+hello\Application.class

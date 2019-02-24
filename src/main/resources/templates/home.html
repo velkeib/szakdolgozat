@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Tenis court reservation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <p>
+        Welcome, <span th:text="${#httpServletRequest.remoteUser}"></span>
+    </p>
+    <p>
+        Welcome, <span th:text="${authenticatedUser}"></span>
+    </p>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>
