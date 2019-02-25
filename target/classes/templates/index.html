@@ -10,12 +10,13 @@
     <h3>Create an account</h3>
     <form action="#" th:action="@{/}" th:object="${user}" method="post">
         <table>
-            <tbody><tr><td>Email address:</td><td><input type="text" th:field="*{username}" /></td></tr>
-            <tr><td>First name:</td><td><input type="text" th:field="*{firstName}"></td></tr>
-            <tr><td>Last name:</td><td><input type="text" th:field="*{lastName}"></td></tr>
-            <tr><td>Password:</td><td><input type="password" th:field="*{password}"></td></tr>
+            <tbody><tr><td>Email address:</td><td><input type="text" th:field="*{username}" oninput="checkEmail(this.value)"/></td><td id="emailcorrect"></td></tr>
+            <tr><td>First name:</td><td><input type="text" th:field="*{firstName}" oninput="checkFirstName(this.value, 'firstnamecorrect')"/></td><td id="firstnamecorrect"></td></tr>
+            <tr><td>Last name:</td><td><input type="text" th:field="*{lastName}" oninput="checkFirstName(this.value, 'lastnamecorrect')"/></td><td id="lastnamecorrect"></td></tr>
+            <tr><td>Password:</td><td><input type="password" th:field="*{password}" oninput="checkPassword(this.value)"/></td><td id="passwordcorrect"></td>></td></tr>
             <tr><td colspan="2"><input name="submit" type="submit" value="Register"></td></tr>
             </tbody></table>
     </form>
+    <script src="css/javascript.js"></script>
 </body>
 </html>

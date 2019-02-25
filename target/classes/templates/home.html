@@ -10,7 +10,7 @@
         Welcome, <span th:text="${#httpServletRequest.remoteUser}"></span>
     </p>
     <p>
-        Welcome, <span th:text="${authenticatedUser}"></span>
+        Welcome, <span th:text="${authenticatedUser.firstName}"></span> <span th:text="${authenticatedUser.lastName}"></span>
     </p>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
