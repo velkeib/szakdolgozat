@@ -109,6 +109,7 @@ public class AppController {
             // save a couple of customer
             repository.save(new User(1L, "sad@sad.hu", "Jack", "Sparrow", "$2a$04$YDiv9c./ytEGZQopFfExoOgGlJL6/o0er0K.hiGb5TGKHUL8Ebn..", true, User.Role.ROLE_USER));
             repository.save(new User(2L, "test@stest.hu", "Bence", "Velkei", "$2a$10$OCdR/doDzVLvDpJ1QtJO3ONJR80EQHeVXhnA7SB6qrlR0vwecTfhy", true, User.Role.ROLE_USER));
+            repository.save(new User(3L, "test", "test", "test", "$2a$10$iKieGnwWVKdjRmRLnv/qG.4IZQ761q7/xORG4hAfbF5NvMW.jOovq", true, User.Role.ROLE_USER));
 
             //repository.save(new User("Chloe", "O'Brian", "asd@sad.hu"));
             //repository.save(new User("Kim", "Bauer", "asd@sad.hu"));

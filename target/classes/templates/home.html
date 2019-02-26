@@ -3,14 +3,14 @@
 <head> 
     <title>Tenis court reservation</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
     <p>
         Welcome, <span th:text="${#httpServletRequest.remoteUser}"></span>
     </p>
     <p>
-        Welcome, <span th:text="${authenticatedUser.firstName}"></span> <span th:text="${authenticatedUser.lastName}"></span>
+        Welcome, <span th:text="${authenticatedUser}"></span>
     </p>
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out"/>
