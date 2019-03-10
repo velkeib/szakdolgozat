@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -45,7 +50,8 @@ public class User {
         ROLE_GUEST, ROLE_USER, ROLE_ADMIN
     }
 
-    User(String username, String firstName, String lastName, String password){
+    @Autowired
+    public User(String username, String firstName, String lastName, String password){
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;

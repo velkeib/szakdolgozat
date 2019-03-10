@@ -1,7 +1,12 @@
 hello\WebSecurityConfig.class
-hello\Entity\User.class
-hello\AppController.class
+hello\entity\User.class
+hello\dto\RecordDto.class
 hello\security\MyUserDetailsService.class
-hello\Entity\User$Role.class
 hello\repository\UserRepository.class
 hello\Application.class
+hello\entity\User$Role.class
+hello\entity\Court.class
+hello\AppController.class
+hello\entity\TimeRecord.class
+hello\repository\CourtRepository.class
+hello\repository\TimeRecordRepository.class

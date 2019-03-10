@@ -41,3 +41,5 @@ function checkPassword(password) {
     }
     this.checkIfAllValid();
 }
+
+$('.datepicker').datepicker();

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Tennis court reservation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+    <!--<p>
+        Welcome, <span th:text="${#httpServletRequest.remoteUser}"></span>
+    </p>-->
+    <p>
+        Welcome, <span th:text="${authenticatedUser.firstName + ' ' + authenticatedUser.lastName}"></span>
+    </p>
+    <!--<p>
+        Tennis Courts, <span th:text="${TennisCourts[0]}"></span>
+    </p>-->
+    <!--<div th:each="tennisCourt : ${tennisCourts}"
+       th:text="${tennisCourt.name}">
+        <p th:each="reservation : ${reservations}"
+           th:text="${reservation.id}">
+            <div th:switch="${tennisCourt.id}">
+                <p th:case="'admin'">User is an administrator</p>
+                <p th:case="#{reservation.courtID}">User is a manager</p>
+                <p th:case="*">User is some other thing</p>
+            </div>
+        </p>
+    </div>-->
+    <a th:href="@{/reservation(id=3)}"></a>
+
+    <h2>Every reservation</h2>
+    <h3>Courts:</h3>
+    <section th:each="tennisCourt : ${tennisCourts}">
+        <a th:href="@{/reservation/} + ${tennisCourtStat.index}"><p th:text="${tennisCourt.name}"></p></a>
+        <ul>
+            <li th:each="reservation : ${reservations}" th:if="${reservation.courtID == tennisCourt.id}" th:text="${reservation.id}">
+            </li>
+        </ul>
+    </section>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out"/>
+    </form>
+</body>
+</html>

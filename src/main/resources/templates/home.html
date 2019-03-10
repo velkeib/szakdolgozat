@@ -1,19 +1,77 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head> 
-    <title>Tenis court reservation</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Tennis court reservation</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
 </head>
 <body>
-    <p>
-        Welcome, <span th:text="${#httpServletRequest.remoteUser}"></span>
-    </p>
-    <p>
-        Welcome, <span th:text="${authenticatedUser}"></span>
-    </p>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
+
+<div class="container">
+    <div class="row">
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand" href="/home">Home</a>
+            <a class="navbar-brand" href="/">Register</a>
+            <a class="navbar-brand" href="login">Login</a>
+            <span class="navbar-text" th:text="${authenticatedUser.firstName + ' ' + authenticatedUser.lastName}"></span>
+        </nav>
+        <div class="col-md-2"></div>
+        <div class="col-md-8" layout:fragment="content">
+            <h3>Courts:</h3>
+            <div class="container">
+                <div class="row">
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-3'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!--
+            <section th:each="tennisCourt : ${tennisCourts}">
+                <a th:href="@{/reservation/} + ${tennisCourtStat.index}"><p th:text="${tennisCourt.name}"></p></a>
+                <ul>
+                    <li th:each="reservation : ${reservations}" th:if="${reservation.courtID == tennisCourt.id}" th:text="${reservation.id}">
+                    </li>
+                </ul>
+            </section>-->
+            <!--<span th:text="${test}"></span>
+            <span th:text="${reservations}"></span>-->
+
+            <div th:each="tennisCourt : ${tennisCourts}">
+                <a th:href="@{/reservation/} + ${tennisCourtStat.index}"><p th:text="${tennisCourt.name}"></p></a>
+                <div th:each="reservation : ${reservations}" th:if="${reservation.courtID == tennisCourt.id}">
+                    <div class="row">
+                        <div class="col-md-3"><span th:text="${reservation.customer}"></span></div>
+                        <div class="col-md-3"><span th:text="${reservation.startDate}"></span></div>
+                        <div class="col-md-3"><span th:text="${reservation.endDate}"></span></div>
+                        <div class="col-md-3"><span th:text="${reservation.reason}"></span></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
