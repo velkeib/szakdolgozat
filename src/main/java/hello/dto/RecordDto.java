@@ -1,15 +1,16 @@
 package hello.dto;
 
 import java.util.Calendar;
-import lombok.AllArgsConstructor;
+import lombok.*;
 import javax.persistence.*;
 import lombok.*;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class RecordDto {
 
-    private Long id;
+    private String id;
     private String customer;
     private String startDate;
     private String endDate;

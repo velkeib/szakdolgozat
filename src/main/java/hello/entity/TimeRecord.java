@@ -7,11 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Data;
+/*import lombok.Data;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.NoArgsConstructor;*/
 import lombok.*;
 import javax.persistence.*;
+import java.util.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -30,10 +31,10 @@ public class TimeRecord {
     private Long customer;
 
     @Column(nullable = false)
-    private Calendar startDate;
+    private GregorianCalendar startDate;
 
     @Column(nullable = false)
-    private Calendar endDate;
+    private GregorianCalendar endDate;
 
     @Column(nullable = false)
     private Long courtID;
@@ -41,7 +42,7 @@ public class TimeRecord {
     @Column(nullable = false)
     private String reason;
 
-    public TimeRecord(Long customer, Calendar startDate, Calendar endDate, Long courtID, String reason){
+    public TimeRecord(Long customer, GregorianCalendar startDate, GregorianCalendar endDate, Long courtID, String reason){
         this.customer = customer;
         this.startDate = startDate;
         this.endDate = endDate;

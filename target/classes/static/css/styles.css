@@ -11,3 +11,13 @@ body {
     vertical-align: middle;
     background-color: lightblue;
 }
+
+.datepicker {
+    display: inline-block;
+    text-align: center;
+}
+
+.centerthis{
+    margin-left: auto;
+    margin-right: auto;
+}

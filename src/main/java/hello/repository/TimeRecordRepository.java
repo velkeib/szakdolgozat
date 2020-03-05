@@ -15,4 +15,8 @@ public interface TimeRecordRepository extends CrudRepository<TimeRecord, Long> {
 
     @Query("SELECT t FROM TimeRecord t WHERE t.startDate >= :startDate")
     public List<TimeRecord> find(@Param("startDate") Calendar startDate);
+
+    @Query("SELECT t FROM TimeRecord t WHERE t.startDate >= :startDate and t.endDate < :endDate")
+    public List<TimeRecord> getByDay(@Param("startDate") Calendar startDate, @Param("endDate") Calendar endDate);
+
 }

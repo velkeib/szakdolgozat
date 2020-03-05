@@ -1,3 +1,82 @@
+var timetable = new Timetable();
+
+timetable.setScope(8,22)
+
+timetable.addLocations(this.setLocations());
+
+this.setReservations();
+
+
+//timetable.addEvent('Lasergaming', 'London', new Date(2020,02,22,17,45), new Date(2020,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+
+/*
+timetable.addEvent('Sightseeing', 'Rotterdam', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
+timetable.addEvent('Zumba', 'Madrid', new Date(2015,7,17,12), new Date(2015,7,17,13), { url: '#' });
+timetable.addEvent('Zumbu', 'Madrid', new Date(2015,7,17,13,30), new Date(2015,7,17,15), { url: '#' });
+timetable.addEvent('Lasergaming', 'London', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
+timetable.addEvent('All-you-can-eat grill', 'New York', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
+timetable.addEvent('Hackathon', 'Tokyo', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
+timetable.addEvent('Tokyo Hackathon Livestream', 'Los Angeles', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
+timetable.addEvent('Lunch', 'Jakarta', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
+    window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+}});
+timetable.addEvent('Cocktails', 'Rotterdam', new Date(2015,7,18,00,00), new Date(2015,7,18,02,00), { class: 'vip-only' });
+*/
+
+
+this.setLocations();
+
+this.setTimeTable();
+
+function setTimeTable(){
+    timetable.events = [];
+
+
+  for(var i = 0; i < reservations.length; i++){
+    console.log(authenticatedUser.firstName + " " + authenticatedUser.lastName +"   "+ reservations[i].customer);
+
+     timetable.addEvent(reservations[i].reason + "\n " + reservations[i].customer, reservations[i].courtName, new Date(reservations[i].startDate.split(/[\s-:]+/)[0], reservations[i].startDate.split(/[\s-:]+/)[1],
+                                                                                        reservations[i].startDate.split(/[\s-:]+/)[2], reservations[i].startDate.split(/[\s-:]+/)[3],
+                                                                                            reservations[i].startDate.split(/[\s-:]+/)[4]), new Date(reservations[i].endDate.split(/[\s-:]+/)[0], reservations[i].endDate.split(/[\s-:]+/)[1],
+                                                                                                                                                      reservations[i].endDate.split(/[\s-:]+/)[2], reservations[i].endDate.split(/[\s-:]+/)[3],
+                                                                                                                                                      reservations[i].endDate.split(/[\s-:]+/)[4]),
+                                                                           { onClick: function(event) {
+                                                                                 //window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
+                                                                                 if(authenticatedUser.firstName + " " + authenticatedUser.lastName === event.name.split("\n ")[1]){
+                                                                                    window.location.href = "http://localhost:8080/reservation/" + event.options.data.id;
+                                                                                }
+                                                                             }, class: authenticatedUser.firstName + " " + authenticatedUser.lastName === reservations[i].customer ? 'vip-only' : '', data: { id : reservations[i].id} } );
+  }
+  var renderer = new Timetable.Renderer(timetable);
+  renderer.draw('.timetable');
+}
+
+function setLocations(){
+    console.log(tennisCourts);
+
+    var locations = [];
+
+    for(var i = 0; i < tennisCourts.length; i++){
+        locations.push(tennisCourts[i].name);
+    }
+
+    return locations;
+}
+
+
+function setReservations(){
+
+    for(var i = 0; i < reservations.length; i++){
+        for(var j = 0; j < tennisCourts.length; j++){
+            if(reservations[i].courtID == tennisCourts[j].id){
+                reservations[i].courtName = tennisCourts[j].name;
+            }
+        }
+    }
+
+    console.log(reservations);
+}
+
 function checkEmail(email) {
   var re = /\S+@\S+\.\S+/;
   console.log(email);
@@ -42,4 +121,77 @@ function checkPassword(password) {
     this.checkIfAllValid();
 }
 
-$('.datepicker').datepicker();
+function fireLogout(){
+    document.getElementById("logoutbutton").submit();
+}
+
+function clearReservation(){
+    reservations = [];
+}
+
+
+function dayChanged() {
+
+    //console.log("test");
+
+    var that = this;
+
+    $.ajax({
+        type : "POST",
+        url : "http://localhost:8080/api/search",
+        data: { filterDay: document.getElementById("filterdatepicker").value},
+        success: function(data){
+            //console.log(data)
+            that.clearReservation();
+
+            reservations = data;
+
+            that.setReservations();
+            that.setTimeTable();
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+});
+
+/*
+$.post("http://localhost:8080/api/search", { filterDay: document.getElementById("filterdatepicker").value},
+     function(returnedData){
+        console.log(returnedData);
+}, 'json');
+*/
+
+}
+
+
+function saveRecord() {
+
+    //console.log("test");
+
+            var data = {}
+			data["courtID"] =  document.getElementById("courtID").value;
+			data["reason"] = document.getElementById("reason").value;
+
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/api/save",
+        data: JSON.stringify(data),
+        headers: { 'api-key':'myKey' },
+        dataType: 'json',
+        timeout: 600000,
+
+
+/*
+
+        type : "POST",
+        url : "/saveRecord",
+        data: 'courtID=' + document.getElementById("courtID").value + '&reason=' + document.getElementById("reason").value,
+  */      success: function(data){
+            console.log(data)
+        }
+});
+
+}

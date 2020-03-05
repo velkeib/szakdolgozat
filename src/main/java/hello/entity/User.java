@@ -57,7 +57,7 @@ public class User {
         this.lastName = lastName;
         this.password = password;
         this.enabled = true;
-        this.role = Role.ROLE_USER;
+        this.role = Role.ROLE_GUEST;
     }
 
     @Override
