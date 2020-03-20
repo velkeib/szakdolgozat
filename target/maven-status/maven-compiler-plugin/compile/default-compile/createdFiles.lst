@@ -3,8 +3,10 @@ hello\Entity\TimeRecord.class
 hello\Entity\Court.class
 hello\dto\RecordDto.class
 hello\StripeService.class
+hello\repository\PaymentRepository.class
 hello\dto\Payment.class
 hello\security\MyUserDetailsService.class
+hello\Entity\UserInformation.class
 hello\repository\UserRepository.class
 hello\Application.class
 hello\Entity\User.class
@@ -15,4 +17,6 @@ hello\AppController.class
 hello\repository\CourtRepository.class
 hello\Entity\User$Role.class
 hello\dto\ChargeRequest.class
+hello\Entity\Payment.class
+hello\repository\UserInformationRepository.class
 hello\repository\TimeRecordRepository.class

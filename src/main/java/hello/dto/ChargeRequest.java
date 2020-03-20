@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class ChargeRequest {
 
     public enum Currency {
-        EUR, USD;
+        EUR, USD, HUF;
     }
     private String description;
     private int amount;

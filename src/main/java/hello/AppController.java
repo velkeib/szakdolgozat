@@ -8,6 +8,8 @@ import hello.entity.User;
 import hello.repository.CourtRepository;
 import hello.repository.TimeRecordRepository;
 import hello.repository.UserRepository;
+import hello.repository.UserInformationRepository;
+import hello.entity.UserInformation;
 import hello.dto.ChargeRequest;
 import hello.dto.*;
 
@@ -83,6 +85,9 @@ public class AppController {
     private CourtRepository courtRepository;
 
     @Autowired
+    private UserInformationRepository userInformationRepository;
+
+    @Autowired
     private TimeRecordRepository recordRepository;
 
     @Autowired
@@ -102,7 +107,7 @@ public class AppController {
 
     @GetMapping("/home")
     public String home(Model model, Principal principal) {
-        log.info(principal.getName());
+        //log.info(principal.getName());
 
         Date date = new Date();
 
@@ -128,14 +133,14 @@ public class AppController {
 
         Iterable<TimeRecord> recordstest = recordRepository.findAll();
 
-        log.info(recordstest.toString());
+        //log.info(recordstest.toString());
 
         Iterable<TimeRecord> records = recordRepository.getByDay(calendar, calendarEnd);
         List<RecordDto> rec = new ArrayList<>();
         for(TimeRecord s: records){
-            log.info(s.getCustomer().toString());
-            log.info(userRepository.findById(s.getCustomer()).toString());
-            log.info(userRepository.findById(s.getCustomer()).get().getFirstName() + " " + userRepository.findById(s.getCustomer()).get().getLastName());
+            //log.info(s.getCustomer().toString());
+            //log.info(userRepository.findById(s.getCustomer()).toString());
+            //log.info(userRepository.findById(s.getCustomer()).get().getFirstName() + " " + userRepository.findById(s.getCustomer()).get().getLastName());
             name = userRepository.findById(s.getCustomer()).get().getFirstName() + " " + userRepository.findById(s.getCustomer()).get().getLastName();
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -145,7 +150,7 @@ public class AppController {
                     s.getReason()));
         }
 
-        log.info(rec.toString());
+        //log.info(rec.toString());
 
         model.addAttribute("authenticatedUser", userRepository.findByUsername(principal.getName()).get());
         model.addAttribute("tennisCourts", courtRepository.findAll());
@@ -185,7 +190,7 @@ public class AppController {
     public String index(Model model) {
         model.addAttribute("user", new User());
         for (User customer : userRepository.findAll()) {
-            log.info(customer.toString());
+            //log.info(customer.toString());
         }
         return "index";
     }
@@ -225,6 +230,7 @@ public class AppController {
         user.setRole(User.Role.ROLE_USER);
         return ResponseEntity.ok(userRepository.save(user));
     }
+
 
     @RequestMapping(value = "/home", method=RequestMethod.POST)
     public String processTimeRecordForm(@ModelAttribute(value="timeRecord") DateTimeRecordDto timeRecord, Principal principal, Model model) {
@@ -382,7 +388,7 @@ public class AppController {
 
     @RequestMapping("/api/search")
     @ResponseBody List<RecordDto> getSearchResultViaAjax(@RequestParam(required=false, defaultValue="World") String filterDay, Principal principal, Model model) {
-        log.info(filterDay);
+        //log.info(filterDay);
 
         GregorianCalendar startDateFilter = new GregorianCalendar(Integer.parseInt(filterDay.split("/")[2]),
                 Integer.parseInt(filterDay.split("/")[0]) - 1,
@@ -393,8 +399,8 @@ public class AppController {
 
         Iterable<TimeRecord> records = recordRepository.getByDay(startDateFilter, endDateFilter);
 
-        log.info(startDateFilter.toString());
-        log.info(endDateFilter.toString());
+        //log.info(startDateFilter.toString());
+        //log.info(endDateFilter.toString());
 
         String name = "";
         List<RecordDto> rec = new ArrayList<>();
@@ -409,30 +415,92 @@ public class AppController {
                     s.getReason()));
         }
 
-        log.info(rec.toString());
-        log.info(model.toString());
+        //log.info(rec.toString());
+        //log.info(model.toString());
 
         model.addAttribute("reservations", rec);
 
-        log.info(model.toString());
+        //log.info(model.toString());
 
         return rec;
     }
 
     @RequestMapping("/userdetail")
-    public String getReservation(Principal principal, Model model){
+    public String getUserInformation(Principal principal, Model model){
+
+        model.addAttribute("amount", 30 * 100); // in cents
+        model.addAttribute("stripePublicKey", stripePublicKey);
+        model.addAttribute("currency", ChargeRequest.Currency.EUR);
+
+        User user = userRepository.findByUsername(principal.getName()).get();
+        if(userInformationRepository.findByUserId(user.getId()).isPresent()){
+            log.info(userInformationRepository.findByUserId(user.getId()).get().toString());
+            model.addAttribute("userInformation", userInformationRepository.findByUserId(user.getId()).get());
+
+            //GregorianCalendar startOfMembership =  userInformationRepository.findByUserId(user.getId()).get().getStartOfMembership();
+            //GregorianCalendar currentDate = new GregorianCalendar();
+
+
+
+        }else{
+            model.addAttribute("userInformation", new UserInformation());
+        }
 
         model.addAttribute("authenticatedUser", userRepository.findByUsername(principal.getName()).get());
+
+        return "userDetail";
+    }
+
+    @PostMapping("userdetail")
+    public String setUserInformations(@ModelAttribute("userInformation") UserInformation userInformation, Principal principal, Model model){
+
+        model.addAttribute("amount", 30 * 100); // in cents
+        model.addAttribute("stripePublicKey", stripePublicKey);
+        model.addAttribute("currency", ChargeRequest.Currency.EUR);
+
+        User user = userRepository.findByUsername(principal.getName()).get();
+
+        model.addAttribute("authenticatedUser", user);
+        //model.addAttribute("userInformation", new UserInformation());
+
+        //userInformation.setUserId();
+
+
+
+        userInformation.setUserId(user.getId());
+        userInformation.setIsMember("false");
+
+        log.info(userInformation.toString());
+
+        /*
+        if(userInformation.getIsMember() != null){
+            if(userInformationRepository.findByUserId(user.getId()).ifPresent()) {
+                if (userInformationRepository.findByUserId(user.getId()).get().getStartOfMembership() == null) {
+                    userInformation.setStartOfMembership(new GregorianCalendar());
+                }
+            }
+        }
+        */
+        log.info(userInformation.toString());
+
+        userInformationRepository.save(userInformation);
+
+        //userInformationRepository.save(userInformation);
+
+        if(userInformationRepository.findByUserId(user.getId()).isPresent()){
+            log.info(userInformationRepository.findByUserId(user.getId()).get().toString());
+            model.addAttribute("userInformation", userInformationRepository.findByUserId(user.getId()).get());
+        }else{
+            model.addAttribute("userInformation", new UserInformation());
+        }
 
 
         return "userDetail";
     }
 
-
-
     @RequestMapping("/checkout")
     public String checkout(Model model) {
-        model.addAttribute("amount", 50 * 100); // in cents
+        model.addAttribute("amount", 30 * 100); // in cents
         model.addAttribute("stripePublicKey", stripePublicKey);
         model.addAttribute("currency", ChargeRequest.Currency.EUR);
         return "checkout";
@@ -444,13 +512,15 @@ public class AppController {
     @PostMapping("/charge")
     public String charge(ChargeRequest chargeRequest, Model model)
             throws StripeException {
-        chargeRequest.setDescription("Example charge");
+
+        chargeRequest.setDescription("Payment");
         chargeRequest.setCurrency(Currency.EUR);
         Charge charge = paymentsService.charge(chargeRequest);
         model.addAttribute("id", charge.getId());
         model.addAttribute("status", charge.getStatus());
         model.addAttribute("chargeId", charge.getId());
         model.addAttribute("balance_transaction", charge.getBalanceTransaction());
+
         return "result";
     }
 
@@ -557,9 +627,9 @@ public class AppController {
         Iterable<TimeRecord> records = recordRepository.getByDay(calendar, calendarEnd);
         List<RecordDto> rec = new ArrayList<>();
         for(TimeRecord s: records){
-            log.info(s.getCustomer().toString());
-            log.info(userRepository.findById(s.getCustomer()).toString());
-            log.info(userRepository.findById(s.getCustomer()).get().getFirstName() + " " + userRepository.findById(s.getCustomer()).get().getLastName());
+            //log.info(s.getCustomer().toString());
+            //log.info(userRepository.findById(s.getCustomer()).toString());
+            //log.info(userRepository.findById(s.getCustomer()).get().getFirstName() + " " + userRepository.findById(s.getCustomer()).get().getLastName());
             name = userRepository.findById(s.getCustomer()).get().getFirstName() + " " + userRepository.findById(s.getCustomer()).get().getLastName();
 
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -575,7 +645,7 @@ public class AppController {
         model.addAttribute("everyUser", userRepository.findAll());
         model.addAttribute("everyRole", Arrays.asList(User.Role.class.getEnumConstants()));
 
-        log.info(userRepository.findAll().toString());
+        //log.info(userRepository.findAll().toString());
 
         return "/admin";
     }
@@ -588,11 +658,24 @@ public class AppController {
         return "Success";
     }
 
+    @GetMapping("/getReservation")
+    @ResponseBody public TimeRecord getReservationById(@RequestParam("id") String id) {
+
+        TimeRecord timeRecord = recordRepository.findById(Long.valueOf(id)).get();
+
+        return timeRecord;
+    }
+
+
     @RequestMapping(value = "/updateRecord", method = RequestMethod.POST)
-    @ResponseBody public String deleteRecord(@RequestParam String Id, @RequestParam String startDate, @RequestParam String startTime, @RequestParam String endDate
+    @ResponseBody public String updateRecord(@RequestParam String Id, @RequestParam(required = false) String customerId, @RequestParam String startDate, @RequestParam String startTime, @RequestParam String endDate
             ,@RequestParam String endTime, @RequestParam String reason, @RequestParam String courtId){
 
         TimeRecord timeRecord = recordRepository.findById(Long.valueOf(Id)).get();
+
+        if(customerId != null){
+            timeRecord.setCustomer(Long.valueOf(customerId));
+        }
 
         //log.info();
 
@@ -605,7 +688,7 @@ public class AppController {
         timeRecord.setReason(reason);
 
 
-        log.info(timeRecord.toString());
+        //log.info(timeRecord.toString());
 
         recordRepository.save(timeRecord);
 
@@ -630,13 +713,33 @@ public class AppController {
     @RequestMapping(value = "/api/save", method = RequestMethod.POST)
     public String saveRecord(@RequestParam String courtID, @RequestParam String reason) throws Exception {
         //Employee employee = new Employee();
-        log.info(courtID + ", " + reason);
+        //log.info(courtID + ", " + reason);
         //String lastName = request.getParameter("lastName");
         /*String email = request.getParameter("email");
         employee.setEmail(email);
         employee.setFirstName(firstName);
         employee.setLastName(lastName);*/
         return courtID + ", " + reason;
+    }
+
+    @RequestMapping(value = "/startMembership", method = RequestMethod.POST)
+    @ResponseBody public String startMembership(@RequestParam String id){
+
+        if(userInformationRepository.findByUserId(Long.valueOf(id)).isPresent()) {
+            UserInformation userInformation = userInformationRepository.findByUserId(Long.valueOf(id)).get();
+            if(userInformation.getStartOfMembership() == null) {
+                userInformation.setIsMember("true");
+                userInformation.setStartOfMembership(new GregorianCalendar());
+
+                userInformationRepository.save(userInformation);
+
+                return "Success";
+            }else{
+                return "You already started your membership!";
+            }
+        }else{
+            return "Fill in you informations before you can start the membership!";
+        }
     }
 
 }

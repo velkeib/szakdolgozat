@@ -2,6 +2,8 @@ var timetable = new Timetable();
 
 var selectedID;
 
+var selectedReservation;
+
 timetable.setScope(8,22)
 
 timetable.addLocations(this.setLocations());
@@ -15,6 +17,7 @@ this.setTimeTable();
 function setTimeTable(){
     timetable.events = [];
 
+var that = this;
 
   for(var i = 0; i < reservations.length; i++){
     console.log(authenticatedUser.firstName + " " + authenticatedUser.lastName +"   "+ reservations[i].customer);
@@ -26,9 +29,21 @@ function setTimeTable(){
                                                                                                                                                       reservations[i].endDate.split(/[\s-:]+/)[4]),
                                                                            { onClick: function(event) {
                                                                                  //window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-                                                                                 if(authenticatedUser.firstName + " " + authenticatedUser.lastName === event.name.split("\n ")[1]){
-                                                                                    window.location.href = "http://localhost:8080/reservation/" + event.options.data.id;
-                                                                                }
+
+                                                                                 $.ajax({
+                                                                                             type : "GET",
+                                                                                             url : "http://localhost:8080/getReservation?id=" + event.options.data.id,
+                                                                                             success: function(data){
+                                                                                                 console.log(data);
+                                                                                                 selectedID = event.options.data.id;
+                                                                                                 selectedReservation = data;
+                                                                                                 that.selectionChanged();
+                                                                                             },
+                                                                                             error: function (err) {
+                                                                                                 console.log(err)
+                                                                                             }
+                                                                                     });
+
                                                                              }, class: authenticatedUser.firstName + " " + authenticatedUser.lastName === reservations[i].customer ? 'vip-only' : '', data: { id : reservations[i].id} } );
   }
   var renderer = new Timetable.Renderer(timetable);
@@ -85,7 +100,12 @@ function dayChanged() {
             console.log(err)
         }
 });
+}
 
+
+function clearReservation(){
+    reservations = [];
+}
 
 function onRoleChange(){
     $.ajax({
@@ -120,7 +140,8 @@ function onUpdateRecord() {
     $.ajax({
         type : "POST",
         url : "http://localhost:8080/updateRecord",
-        data : {Id: window.location.href.split("/")[window.location.href.split("/").length-1],
+        data : {Id: selectedID,
+        customerId : document.getElementById("inputName").value,
         startDate : document.getElementById("inputStartDate").value,
         startTime : document.getElementById("inputStartTime").value,
         endDate : document.getElementById("inputEndDate").value,
@@ -149,14 +170,54 @@ function onDeleteRecord() {
 
     $.ajax({
         type : "POST",
-        url : "http://localhost:8080/deleteRecord/" + window.location.href.split("/")[window.location.href.split("/").length-1],
+        url : "http://localhost:8080/deleteRecord/" + selectedID,
         success: function(data){
             //console.log(data)
-            window.location.href = "http://localhost:8080/home";
+            window.location.href = "http://localhost:8080/admino";
         },
         error: function (err) {
             console.log(err)
         }
     });
+
+}
+/*
+function getReservation(){
+
+    var that = this;
+
+    $.ajax({
+            type : "POST",
+            url : "http://localhost:8080/getReservation?id=" + id,
+            success: function(data){
+                //console.log(data)
+                that.selectionChanged();
+            },
+            error: function (err) {
+                console.log(err)
+            }
+    });
+
+}*/
+
+
+function selectionChanged(){
+    console.log(selectedReservation);
+
+    document.getElementById("inputName").value = selectedReservation.customer;
+
+     var startDate = selectedReservation.startDate.split("T");
+     var endDate = selectedReservation.endDate.split("T");
+
+    console.log(new Date(startDate[0].split("-")[0], startDate[0].split("-")[1], startDate[0].split("-")[2], startDate[1].split(":")[0], startDate[1].split(":")[1]));
+
+    document.getElementById("inputStartDate").value = startDate[0].split("-")[1]+ "/" + startDate[0].split("-")[2] + "/" + startDate[0].split("-")[0];
+    document.getElementById("inputStartTime").value = (1 + parseInt(startDate[1].split(":")[0])) + ":" + startDate[1].split(":")[1];
+    document.getElementById("inputEndDate").value = endDate[0].split("-")[1]+ "/" +endDate[0].split("-")[2] + "/" + endDate[0].split("-")[0];
+    document.getElementById("inputEndTime").value = (1 + parseInt(endDate[1].split(":")[0])) + ":" + endDate[1].split(":")[1];;
+
+    document.getElementById("inputCourt").value = selectedReservation.courtID
+
+    document.getElementById("inputReason").value = selectedReservation.reason
 
 }
