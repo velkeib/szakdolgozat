@@ -7,10 +7,6 @@ html {
     margin: auto;
 }
 
-body {
-    vertical-align: middle;
-    background-color: lightblue;
-}
 
 .datepicker {
     display: inline-block;

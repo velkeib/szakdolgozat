@@ -1,6 +1,8 @@
 package hello.dto;
 
 import java.util.Calendar;
+import java.util.List;
+
 import lombok.*;
 import javax.persistence.*;
 
@@ -17,6 +19,7 @@ public class DateTimeRecordDto {
     private String endTime;
     private Long courtID;
     private String reason;
+    private List<String> participants;
 
 
 }

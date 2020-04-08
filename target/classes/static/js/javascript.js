@@ -1,28 +1,10 @@
 var timetable = new Timetable();
 
-timetable.setScope(8,22)
+timetable.setScope(8,21)
 
 timetable.addLocations(this.setLocations());
 
 this.setReservations();
-
-
-//timetable.addEvent('Lasergaming', 'London', new Date(2020,02,22,17,45), new Date(2020,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-
-/*
-timetable.addEvent('Sightseeing', 'Rotterdam', new Date(2015,7,17,9,00), new Date(2015,7,17,11,30), { url: '#' });
-timetable.addEvent('Zumba', 'Madrid', new Date(2015,7,17,12), new Date(2015,7,17,13), { url: '#' });
-timetable.addEvent('Zumbu', 'Madrid', new Date(2015,7,17,13,30), new Date(2015,7,17,15), { url: '#' });
-timetable.addEvent('Lasergaming', 'London', new Date(2015,7,17,17,45), new Date(2015,7,17,19,30), { class: 'vip-only', data: { maxPlayers: 14, gameType: 'Capture the flag' } });
-timetable.addEvent('All-you-can-eat grill', 'New York', new Date(2015,7,17,21), new Date(2015,7,18,1,30), { url: '#' });
-timetable.addEvent('Hackathon', 'Tokyo', new Date(2015,7,17,11,30), new Date(2015,7,17,20)); // options attribute is not used for this event
-timetable.addEvent('Tokyo Hackathon Livestream', 'Los Angeles', new Date(2015,7,17,12,30), new Date(2015,7,17,16,15)); // options attribute is not used for this event
-timetable.addEvent('Lunch', 'Jakarta', new Date(2015,7,17,9,30), new Date(2015,7,17,11,45), { onClick: function(event) {
-    window.alert('You clicked on the ' + event.name + ' event in ' + event.location + '. This is an example of a click handler');
-}});
-timetable.addEvent('Cocktails', 'Rotterdam', new Date(2015,7,18,00,00), new Date(2015,7,18,02,00), { class: 'vip-only' });
-*/
-
 
 this.setLocations();
 
@@ -195,3 +177,60 @@ function saveRecord() {
 });
 
 }
+
+(function () {
+  'use strict'
+
+  window.addEventListener('load', function () {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.filter.call(forms, function (form) {
+      form.addEventListener('submit', function (event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  }, false)
+}())
+
+function onchangeinput(){
+
+}
+
+
+function checkIfFieldsFilled(){
+
+    var inputs = document.getElementsByClassName("homeInput");
+
+    var i = 0;
+    var foundEmpty = true
+
+    while(i < inputs.length && foundEmpty){
+
+        if(inputs[i].value === ""){
+            foundEmpty = false
+
+            i++;
+        }
+    }
+
+    if(!foundEmpty){
+        document.getElementById("createButton").disabled = true;
+    }else{
+       document.getElementById("createButton").disabled = false;
+    }
+}
+
+
+
+
+
+
+
+
+

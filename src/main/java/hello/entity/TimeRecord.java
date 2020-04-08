@@ -42,6 +42,10 @@ public class TimeRecord {
     @Column(nullable = false)
     private String reason;
 
+    public enum Reason {
+        MATCH, TRAINING, OTHER
+    }
+
     public TimeRecord(Long customer, GregorianCalendar startDate, GregorianCalendar endDate, Long courtID, String reason){
         this.customer = customer;
         this.startDate = startDate;

@@ -3,15 +3,15 @@
 .timetable li,.timetable ul{list-style-type:none;margin:0}
 .timetable li,.timetable ul{padding:0}
 .timetable>aside{flex:none;max-width:30%;padding:0!important;margin-top:80px;border-right:5px solid transparent;position:relative}
-.timetable>aside li{padding:0 15px;background-color:#efefef;line-height:80px}
+.timetable>aside li{padding:0 15px; background-color:#62627A;color:white;line-height:80px}
 .timetable>aside li:not(:last-of-type){border-bottom:1px solid #fff}
 .timetable>aside .row-heading{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap:normal}
-.timetable>aside:before{content:"";display:block;background-color:#fff;height:80px;position:relative;margin-top:-80px;top:0}
+.timetable>aside:before{content:"";display:block;background-color:#fff;height:80px;position:relative;margin-top:-80px;top:0; background-color: #f8f9fa!important;}
 .timetable aside li,.timetable time li{height:80px}
 .timetable>section{flex:3 0 auto;width:0;padding:0!important}
 .timetable>section time{display:block;width:100%;overflow-x:scroll;-webkit-overflow-scrolling:touch}
 .timetable>section>header{position:relative;top:0;z-index:3;width:100%;overflow:hidden;background-color:#fff;transform-style:preserve-3d}
-.timetable>section>header ul{display:flex;height:80px;align-items:center}
+.timetable>section>header ul{display:flex;height:80px;align-items:center;background-color: #f8f9fa!important;}
 .timetable>section>header li{flex:none;display:block;position:relative;width:96px}
 .timetable>section>header li .time-label{display:block;position:absolute;left:0}
 .timetable>section>header li:not(:first-of-type) .time-label{transform:translateX(-80%)}
@@ -19,7 +19,7 @@
 .timetable>section>header li:last-of-type .time-label{transform:translateX(-100%)}
 .timetable ul.room-timeline{border-left:none;display:flex;flex-direction:column;align-items:stretch}
 .timetable ul.room-timeline li{position:relative;background-color:#f4f4f4;height:80px}
-.timetable ul.room-timeline li:nth-of-type(odd){background-color:#fdfdfd}
+.timetable ul.room-timeline li:nth-of-type(odd){background-color:#f4f4f4}
 .timetable ul.room-timeline li:first-of-type{border-top:1px solid #e5e5e5}
 .timetable ul.room-timeline li:last-of-type{border-bottom:1px solid #e5e5e5}
 .timetable ul.room-timeline li:not(:last-of-type){border-bottom:none}
@@ -27,32 +27,6 @@
 .timetable ul.room-timeline li:after,.timetable ul.room-timeline li:before{content:"";position:absolute;z-index:1;left:0;top:0;right:0;bottom:0}
 .timetable ul.room-timeline li:before{background-image:linear-gradient(90deg,#e5e5e5 1px,transparent 0);background-size:24px auto}
 .timetable ul.room-timeline li:after{background-image:linear-gradient(90deg,#e5e5e5,#e5e5e5 1px,#f4f4f4 0,#f4f4f4 2px,#e5e5e5 0,#e5e5e5 3px,transparent 0,transparent);background-size:96px auto;background-position:-2px 0}
-.timetable .time-entry{background-color:#ec6a5e;transition:background-color .2s;height:78px;display:block;position:absolute;z-index:2;padding:0 10px;white-space:normal;overflow:hidden;color:#fff;border:1px solid #e32c1b;transform-style:preserve-3d}
-.timetable .time-entry small{position:relative;top:80%;transform:translateY(-80%);display:block}.timetable .time-entry:hover{background-color:#e74030
-.timetable .time-entry.vip-only{background-color:#c490f5;border:1px solid #6a16b8}
-.centerthisright{
-    position: relative;
-                 display: block;
-                 margin : 0 auto;
-                 float: right;
-}
-.centerthisleft{
-    position: relative;
-                 display: block;
-                 margin : 0 auto;
-                 float: left;
-}
-
-.centerthis{
-    position: relative;
-                     display: block;
-                     margin : 0 auto;
-}
-
-.centertext{
-    text-align: center;
-}
-
-.setWidth{
-    width: 30%;
-}
+.timetable .time-entry{background-color:#62627A;transition:background-color .2s;height:78px;display:block;position:absolute;z-index:2;padding:0 10px;white-space:normal;overflow:hidden;color:#fff;border:1px solid #62627A;transform-style:preserve-3d}
+.timetable .time-entry small{position:relative;top:80%;transform:translateY(-80%);display:block}.timetable .time-entry:hover{background-color:#62627A}
+.timetable .time-entry.vip-only{background-color:#B7CE42;color:white; border:1px solid #B7CE42}

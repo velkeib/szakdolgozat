@@ -1,3 +1,15 @@
+$(document).ready(function(){
+
+    var participantsId = [];
+
+    for(var i = 0; i < reservation.participants.length; i++){
+        participantsId.push(reservation.participants[i].userId);
+    }
+
+
+    $('#inputParticipants').val(participantsId).trigger('chosen:updated');
+});
+
 this.onInit();
 
 
@@ -25,6 +37,10 @@ function onInit(){
 
     document.getElementById("inputReason").value = reservation.reason
 
+    console.log(reservation.participants);
+
+    //$('#inputParticipants').chosen('destroy').val(reservation.participants).chosen();
+
 }
 
 function onTest(){
@@ -41,19 +57,27 @@ function onUpdateRecord() {
     $.ajax({
         type : "POST",
         url : "http://localhost:8080/updateRecord",
-        data : {Id: window.location.href.split("/")[window.location.href.split("/").length-1],
+        data : {Id: window.location.href.split("/")[window.location.href.split("/").length-1].split("?")[0],
         startDate : document.getElementById("inputStartDate").value,
         startTime : document.getElementById("inputStartTime").value,
         endDate : document.getElementById("inputEndDate").value,
         endTime : document.getElementById("inputEndTime").value,
         courtId : document.getElementById("inputCourt").value,
-        reason : document.getElementById("inputReason").value},
+        reason : document.getElementById("inputReason").value,
+        participants: $('#inputParticipants').chosen().val()},
         success: function(data){
             //console.log(data)
-            window.location.href = "http://localhost:8080/home";
+            if(data==="success"){
+                window.location.href = "http://localhost:8080/home?success=update";
+            }else{
+                var pathId = window.location.href.split("/")[window.location.href.split("/").length-1].split("?")[0];
+
+                window.location.href = "http://localhost:8080/reservation/" +   pathId + data;
+            }
         },
         error: function (err) {
             console.log(err)
+
         }
     });
 
@@ -71,7 +95,7 @@ function onDeleteRecord() {
         url : "http://localhost:8080/deleteRecord/" + window.location.href.split("/")[window.location.href.split("/").length-1],
         success: function(data){
             //console.log(data)
-            window.location.href = "http://localhost:8080/home";
+            window.location.href = "http://localhost:8080/home?success=delete";
         },
         error: function (err) {
             console.log(err)
@@ -79,3 +103,4 @@ function onDeleteRecord() {
     });
 
 }
+

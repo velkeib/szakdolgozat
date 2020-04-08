@@ -25,11 +25,15 @@ import java.util.List;
 public class Payment {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = true)
-    private String userId;
+    private String chargeId;
 
     @Column(nullable = true)
-    private String paymentDate;
+    private Long userId;
+
+    @Column(nullable = true)
+    private GregorianCalendar paymentDate;
 }

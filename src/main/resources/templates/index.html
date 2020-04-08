@@ -8,111 +8,122 @@
     <title>Tennis court reservation</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/timetablejs.css">
-    <link rel="stylesheet" href="css/demo.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="css/background.css">>
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 </head>
-<body>
+<body class="bg-light">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark green-color mb-4">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                     <a class="nav-link" href="/">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin">Admin</a>
+                    </li>
+                <!--<li class="nav-item">
+                    <form th:action="@{/logout}" method="post" id="logoutbutton">
+                        <a class="nav-link" onclick="fireLogout()">Log out</a>
+                    </form>
+                </li>-->
+                </ul>
+                <form action="login" class="form-inline mt-2 mt-md-0">
+                    <button class="btn btn-outline-light my-2 my-sm-0">Sign in</button>
+                </form>
+                <form class="form-inline mt-2 ml-2 mt-md-0">
+                    <button class="btn btn-outline-light my-2 my-sm-0" onclick="fireLogout()">Logout</button>
+                </form>
+            </div>
+        </nav>
+    </header>
 
-<div class="container-fluid">
-    <div class="row">
+    <main role="main">
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>Book your tennis court</h1>
+                <p class="lead text-muted">Welcome! Please sign in to create or modify a reservation, or if you want to check if there are available courts right now! If you don't have an account, create one or sign in!</p>
+                <p>
+                    <a href="login" class="btn green-color my-2">Sign in</a>
+                </p>
+            </div>
+        </section>
 
-        <div class="col-2"></div>
-        <div class="col-8" layout:fragment="content">
+    </main>
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="admin">Admin</a>
-                        </li>
-                        <li class="nav-item">
-                            <form th:action="@{/logout}" method="post" id="logoutbutton">
-                                <a class="nav-link" onclick="fireLogout()">Log out</a>
-                            </form>
-                        </li>
-
-                    </ul>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-md-2 order-md-1"></div>
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Create account</h4>
+                <div th:if="${error != ''}" class="alert alert-danger">
+                    <strong>Error!</strong> This email is already used!
                 </div>
-            </nav>
-
-            <h3 class="centertext">Create an account</h3>
-
-            <form action="#" th:action="@{/}" th:object="${user}" method="post">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="firstnameinput">First name</label>
-                        <input type="text" class="form-control" id="firstnameinput" th:field="*{firstName}" autocomplete="off" placeholder="First name">
+                <form action="#" th:action="@{/}" th:object="${user}" method="post" class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstnameinput">First name</label>
+                            <input type="text" class="form-control" id="firstnameinput" th:field="*{firstName}" autocomplete="off" placeholder="First name" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid first name.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastnameinput">Last name</label>
+                            <input type="text" class="form-control" id="lastnameinput" th:field="*{lastName}" placeholder="Last name" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid last name.
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="lastnameinput">Last name</label>
-                        <input type="text" class="form-control" id="lastnameinput" th:field="*{lastName}" placeholder="Last name">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="emailinput">Email</label>
+                            <input type="email" class="form-control" id="emailinput" th:field="*{username}" autocomplete="off" placeholder="Email"  required>
+                            <div class="invalid-feedback">
+                                Please provide a valid email.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="emailinput">Email</label>
-                        <input type="text" class="form-control" id="emailinput" th:field="*{username}" autocomplete="off" placeholder="Email">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="passwordinput">Password</label>
+                            <input type="password" class="form-control" id="passwordinput" th:field="*{password}" placeholder="Password">
+                            <div class="invalid-feedback">
+                                Please provide a valid password.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                        </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="passwordinput">Password</label>
-                        <input type="text" class="form-control" id="passwordinput" th:field="*{password}" placeholder="Password">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-<!--
-            <form action="#" th:action="@{/}" th:object="${user}" method="post">
-                <div class="form-group">
-                    <label>Email address:</label>
-                    <input class="form-control" name="name" th:field="*{username}">
-                </div>
-                <div class="form-group">
-                    <label>First name:</label>
-                    <input class="form-control" name="fname" th:field="*{firstName}">
-                </div>
-                <div class="form-group">
-                    <label>Last name:</label>
-                    <input class="form-control" name="lname" th:field="*{lastName}">
-                </div>
-                <div class="form-group">
-                    <label>Password:</label>
-                    <input class="form-control" name="password" th:field="*{password}">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>-->
-
-
-
-
+                    <button type="submit" class="btn green-color btn-md btn-block">Register</button>
+                </form>
+            </div>
+            <div class="col-md-2 order-md-1"></div>
         </div>
-        <div class="col-2"></div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script src="js/timetable.js"></script>
-<script src="js/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="js/index.js"></script>
 
 </body>
 </html>

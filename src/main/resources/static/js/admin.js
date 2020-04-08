@@ -1,3 +1,7 @@
+$(document).ready(function(){
+
+});
+
 var timetable = new Timetable();
 
 var selectedID;
@@ -147,7 +151,8 @@ function onUpdateRecord() {
         endDate : document.getElementById("inputEndDate").value,
         endTime : document.getElementById("inputEndTime").value,
         courtId : document.getElementById("inputCourt").value,
-        reason : document.getElementById("inputReason").value},
+        reason : document.getElementById("inputReason").value,
+        participants : $('#inputParticipants').chosen().val()},
         success: function(data){
             //console.log(data)
             window.location.href = "http://localhost:8080/home";
@@ -173,10 +178,12 @@ function onDeleteRecord() {
         url : "http://localhost:8080/deleteRecord/" + selectedID,
         success: function(data){
             //console.log(data)
-            window.location.href = "http://localhost:8080/admino";
+            window.location.href = "http://localhost:8080/admin?error=success";
         },
         error: function (err) {
-            console.log(err)
+            if(err.responseJSON.message==="norights"){
+                window.location.href = "http://localhost:8080/admin?error=norights";
+            }
         }
     });
 
@@ -212,12 +219,20 @@ function selectionChanged(){
     console.log(new Date(startDate[0].split("-")[0], startDate[0].split("-")[1], startDate[0].split("-")[2], startDate[1].split(":")[0], startDate[1].split(":")[1]));
 
     document.getElementById("inputStartDate").value = startDate[0].split("-")[1]+ "/" + startDate[0].split("-")[2] + "/" + startDate[0].split("-")[0];
-    document.getElementById("inputStartTime").value = (1 + parseInt(startDate[1].split(":")[0])) + ":" + startDate[1].split(":")[1];
+    document.getElementById("inputStartTime").value = (parseInt(startDate[1].split(":")[0])) + ":" + startDate[1].split(":")[1];
     document.getElementById("inputEndDate").value = endDate[0].split("-")[1]+ "/" +endDate[0].split("-")[2] + "/" + endDate[0].split("-")[0];
-    document.getElementById("inputEndTime").value = (1 + parseInt(endDate[1].split(":")[0])) + ":" + endDate[1].split(":")[1];;
+    document.getElementById("inputEndTime").value = (parseInt(endDate[1].split(":")[0])) + ":" + endDate[1].split(":")[1];;
 
     document.getElementById("inputCourt").value = selectedReservation.courtID
 
     document.getElementById("inputReason").value = selectedReservation.reason
+
+    var participantsId = [];
+
+    for(var i = 0; i < selectedReservation.participants.length; i++){
+        participantsId.push(selectedReservation.participants[i].userId);
+    }
+
+    $('#inputParticipants').val(participantsId).trigger('chosen:updated');
 
 }
