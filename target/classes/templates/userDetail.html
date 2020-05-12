@@ -69,10 +69,7 @@ $( "#inputEndTime" ).timepicker({
             <form action="userdetail" class="form-inline ml-2 mt-2 mt-md-0">
                 <a class="btn btn-outline-light my-2 my-sm-0" href="userdetail" role="button" th:text="${authenticatedUser.firstName + ' ' + authenticatedUser.lastName}"></a>
             </form>
-            <form action="login" class="form-inline ml-2 mt-2 mt-md-0">
-                <button class="btn btn-outline-light my-2 my-sm-0">Sign in</button>
-            </form>
-            <form class="form-inline mt-2 ml-2 mt-md-0">
+            <form class="form-inline mt-2 ml-2 mt-md-0" th:action="@{/logout}">
                 <button class="btn btn-outline-light my-2 my-sm-0" onclick="fireLogout()">Logout</button>
             </form>
         </div>
@@ -93,7 +90,7 @@ $( "#inputEndTime" ).timepicker({
                     <input type="checkbox" class="custom-control-input" onclick="onMembershipCheckboxClicked(this)" id="same-address">
                     <label class="custom-control-label" for="same-address"> I want to start my membership!  It costs 30 EUR / month.</label>
                 </div>
-                <div th:if="${isMember != 'true'}" class="alert alert-success col-md-12">
+                <div th:if="${isMember == true}" class="alert alert-success col-md-12">
                     <strong></strong> You are already member!
                 </div>
             </div>
@@ -102,31 +99,52 @@ $( "#inputEndTime" ).timepicker({
             </div>
         </div>
         <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Reservation management
+            <h4 class="mb-3">User details
             </h4>
-            <form th:action="@{/userdetail}" th:object="${userInformation}" method="post">
+            <div th:if="${error != ''}" class="alert alert-danger col-md-12">
+                <strong>Error!</strong> <span th:text="${error}"></span>
+            </div>
+            <div th:if="${success != ''}" class="alert alert-success col-md-12">
+                <strong>Success!</strong> <span th:text="${success}"></span>
+            </div>
+            <form th:action="@{/userdetail}" th:object="${userInformation}" class="needs-validation" method="post" id='information-form' novalidate>
                 <div class="form-group">
                     <label for="inputPhoneNumber">Phone number</label>
-                    <input th:value="${userInformation.phoneNumber} ?: ''" type="text" oninput="checkIfCanUpdate()" class="form-control forminput" id="inputPhoneNumber" th:field="*{phoneNumber}" placeholder="+36301212121">
+                    <input th:value="${userInformation.phoneNumber} ?: ''" type="text" class="form-control" id="inputPhoneNumber" th:field="*{phoneNumber}" placeholder="+36301212121" required>
+                    <div class="invalid-feedback">
+                        Please provide a date.
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="inputStreet">Street</label>
-                        <input type="text" th:value="${userInformation.street} ?: ''" oninput="checkIfCanUpdate()" class="form-control forminput" id="inputStreet" th:field="*{street}" placeholder="Petőfi Sándor út">
+                        <input type="text" th:value="${userInformation.street} ?: ''" class="form-control" id="inputStreet" th:field="*{street}" placeholder="Petőfi Sándor út" required>
+                        <div class="invalid-feedback">
+                            Please provide a date.
+                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputNumber">Number</label>
-                        <input type="text" th:value="${userInformation.number} ?: ''" oninput="checkIfCanUpdate()" class="form-control forminput" id="inputNumber" th:field="*{number}" placeholder="10.">
+                        <input type="text" th:value="${userInformation.number} ?: ''" class="form-control" id="inputNumber" th:field="*{number}" placeholder="10." required>
+                        <div class="invalid-feedback">
+                            Please provide a date.
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-8">
                         <label for="inputCity">City</label>
-                        <input type="text" th:value="${userInformation.city} ?: ''" oninput="checkIfCanUpdate()" class="form-control forminput" id="inputCity" th:field="*{city}" placeholder="Budapest">
+                        <input type="text" th:value="${userInformation.city} ?: ''" class="form-control" id="inputCity" th:field="*{city}" placeholder="Budapest" required>
+                        <div class="invalid-feedback">
+                            Please provide a date.
+                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputZip">Zip</label>
-                        <input type="text" th:value="${userInformation.zipCode} ?: ''" oninput="checkIfCanUpdate()" class="form-control forminput" id="inputZip" th:field="*{zipCode}" placeholder="1212">
+                        <input type="text" th:value="${userInformation.zipCode} ?: ''" class="form-control" id="inputZip" th:field="*{zipCode}" placeholder="1212" required>
+                        <div class="invalid-feedback">
+                            Please provide a date.
+                        </div>
                     </div>
                 </div>
                 <button type="submit" class="btn green-color btn-md btn-block" id="updateButton">Update</button>
@@ -135,7 +153,7 @@ $( "#inputEndTime" ).timepicker({
     </div>
     <div class="row mt-4">
         <div class="col-md-6 order-md-2 mb-4">
-            <h4 class="mb-3">Reservation management
+            <h4 class="mb-3">Your future reservations
             </h4>
             <table class="table table-striped">
                 <thead>
@@ -152,7 +170,7 @@ $( "#inputEndTime" ).timepicker({
             </table>
         </div>
         <div class="col-md-6 order-md-1">
-            <h4 class="mb-3">Reservation management
+            <h4 class="mb-3">Membership management
             </h4>
             <table class="table table-striped">
                 <thead>

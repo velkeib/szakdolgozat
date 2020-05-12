@@ -66,12 +66,9 @@ $( "#inputEndTime" ).timepicker({
                     </li>
                 </ul>
                 <form action="userdetail" class="form-inline ml-2 mt-2 mt-md-0">
-                    <a class="btn btn-outline-light my-2 my-sm-0" href="userdetail" role="button" th:text="${authenticatedUser.firstName + ' ' + authenticatedUser.lastName}"></a>
+                    <a class="btn btn-outline-light my-2 my-sm-0" href="/userdetail" role="button" th:text="${authenticatedUser.firstName + ' ' + authenticatedUser.lastName}"></a>
                 </form>
-                <form action="login" class="form-inline ml-2 mt-2 mt-md-0">
-                    <button class="btn btn-outline-light my-2 my-sm-0">Sign in</button>
-                </form>
-                <form class="form-inline mt-2 ml-2 mt-md-0">
+                <form class="form-inline mt-2 ml-2 mt-md-0" th:action="@{/logout}">
                     <button class="btn btn-outline-light my-2 my-sm-0" onclick="fireLogout()">Logout</button>
                 </form>
             </div>
@@ -82,10 +79,15 @@ $( "#inputEndTime" ).timepicker({
         <p class="lead">Check out the selected reservation. Here you can modify it or delete it.</p>
     </div>
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" th:if="${notMy != ''}">
+            <div class="alert alert-danger col-md-12">
+                <strong>Error!</strong> <span th:text="${notMy}"></span>
+            </div>
+        </div>
+        <div class="row" th:if="${notMy == ''}">
         <div class="col-md-2 mb-3">
         </div>
-        <div class="col-md-8 mb-3">
+        <div class="col-md-8 mb-3" id='reservation-form'>
             <div class="row">
                 <div th:if="${error != ''}" class="alert alert-danger col-md-12">
                     <strong>Error!</strong> <span th:text="${error}"></span>
@@ -122,7 +124,10 @@ $( "#inputEndTime" ).timepicker({
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputCourt">Court</label>
-                    <input type="text" class="form-control" id="inputCourt" placeholder="Court">
+                    <select class="form-control" id="inputCourt">
+                    <option th:each="tennisCourt : ${tennisCourts}" th:value="${tennisCourt.id}" th:text="${tennisCourt.id + ' - ' + tennisCourt.name}">
+                    </option>
+                </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputReason">Reason</label>
@@ -166,6 +171,7 @@ $( "#inputEndTime" ).timepicker({
             <div class="col col-md-5">
             </div>
             <div class="col col-md-2">
+                <label for="filterdatepicker">Timetable selected date</label>
                 <input type="text" class="form-control" id="filterdatepicker" onchange="dayChanged()">
             </div>
             <div class="col col-md-5">

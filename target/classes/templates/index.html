@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-    <link rel="stylesheet" href="css/background.css">>
+    <link rel="stylesheet" href="css/background.css">
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -43,7 +43,7 @@
                 <form action="login" class="form-inline mt-2 mt-md-0">
                     <button class="btn btn-outline-light my-2 my-sm-0">Sign in</button>
                 </form>
-                <form class="form-inline mt-2 ml-2 mt-md-0">
+                <form class="form-inline mt-2 ml-2 mt-md-0" th:action="@{/logout}">
                     <button class="btn btn-outline-light my-2 my-sm-0" onclick="fireLogout()">Logout</button>
                 </form>
             </div>
@@ -54,7 +54,7 @@
         <section class="jumbotron text-center">
             <div class="container">
                 <h1>Book your tennis court</h1>
-                <p class="lead text-muted">Welcome! Please sign in to create or modify a reservation, or if you want to check if there are available courts right now! If you don't have an account, create one or sign in!</p>
+                <p class="lead text-muted">Welcome! Please sign in to create or modify a reservation or if you want to check if there are available tennis courts right now! If you don't have an account, create one or sign in!</p>
                 <p>
                     <a href="login" class="btn green-color my-2">Sign in</a>
                 </p>
@@ -67,11 +67,14 @@
         <div class="row">
             <div class="col-md-2 order-md-1"></div>
             <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Create account</h4>
+                <h4 class="mb-3">Create an account</h4>
                 <div th:if="${error != ''}" class="alert alert-danger">
                     <strong>Error!</strong> This email is already used!
                 </div>
-                <form action="#" th:action="@{/}" th:object="${user}" method="post" class="needs-validation" novalidate>
+                <div th:if="${success != ''}" class="alert alert-success">
+                    <strong>Success!</strong> <span th:text="${success}"></span>
+                </div>
+                <form action="#" th:action="@{/}" th:object="${user}" method="post" class="needs-validation" id='crete-user-form' novalidate>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstnameinput">First name</label>

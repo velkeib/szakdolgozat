@@ -16,7 +16,7 @@ function onStartMembership(){
         data : {id: authenticatedUser.id},
         success: function(data){
                 console.log(data)
-                //window.location.href = "http://localhost:8080/home";
+                window.location.href = "http://localhost:8080/userdetail" + data;
         },
         error: function (err) {
             console.log(err)
@@ -26,9 +26,13 @@ function onStartMembership(){
 
 console.log(memberships);
 
+
+function fireLogout(){
+    document.getElementById("logoutbutton").submit();
+}
+
 function onInit(){
 
-    this.checkIfCanUpdate();
 
 
     if(isMember){
@@ -38,6 +42,7 @@ function onInit(){
     }
 
     var innerHTML = "";
+    if(memberships !== undefined){
     for(var i = 0; i < memberships.length; i++){
 
         var isCheckbox = "";
@@ -62,6 +67,7 @@ function onInit(){
 
         innerHTML = innerHTML + "</tr>"
 
+    }
     }
     document.getElementById("tableBody").innerHTML = innerHTML;
 
@@ -149,3 +155,21 @@ function onMembershipCheckboxClicked(oEvent){
         document.getElementById("startMembership").disabled = true;
     }
 }
+
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();

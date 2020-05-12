@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: tcr.controller.TestingWebApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.447 s - in tcr.controller.TestingWebApplicationTests

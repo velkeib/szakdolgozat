@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: tcr.RepositoryIntegrationTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.833 s - in tcr.RepositoryIntegrationTest

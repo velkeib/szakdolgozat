@@ -2,46 +2,78 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f606cf8b-0df4-4453-83a2-1823b2cf54b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tcr/controller/AdminController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tcr/controller/HomeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tcr/controller/RegistrationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tcr/controller/ReservationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/tcr/controller/UserInformationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/tcr/controller/TestingWebApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/dto/ChargeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/dto/ChargeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/dto/DateTimeRecordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/dto/DateTimeRecordDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/dto/RecordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/dto/RecordDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/entity/Payment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/TimeRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/entity/TimeRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/TimeRecordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/repository/TimeRecordRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/demo.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/timetablejs.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/timetablejs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/controller/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/StripeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/StripeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/dto/ChargeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/dto/ChargeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/dto/DateTimeRecordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/dto/DateTimeRecordDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/dto/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/dto/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/dto/RecordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/dto/RecordDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/Court.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/entity/Court.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/Membership.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/entity/Membership.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/Participant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/entity/Participant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/Payment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/entity/Payment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/TimeRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/entity/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/UserInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/entity/UserInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/CourtRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/repository/CourtRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/MembershipRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/repository/MembershipRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/ParticipantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/repository/ParticipantRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/PaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/repository/PaymentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/TimeRecordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/repository/ReservationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/UserInformationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/repository/UserInformationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/hello/security/MyUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/tcr/security/MyUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/hello.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/hello.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/javascript.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/javascript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/reservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/reservation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/userdetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/userdetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/checkout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/hello.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/reservation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/result.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/userDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/userDetail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/AppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/AppController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/Payment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/Entity/Payment.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/TimeRecord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/Entity/TimeRecord.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/User$Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/Entity/User$Role.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/Entity/User.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/ChargeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/dto/ChargeRequest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/DateTimeRecordDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/dto/DateTimeRecordDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/RecordDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/dto/RecordDto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/TimeRecordRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/hello/repository/TimeRecordRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/css/timetablejs.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/css/timetablejs.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hello/ApplicationTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/AppController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Application$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Application.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/Court.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/Membership.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/Participant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/Payment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/TimeRecord$Reason.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/TimeRecord.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/User$Role.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/User.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/Entity/UserInformation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/StripeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/WebSecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/ChargeRequest$Currency.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/ChargeRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/DateTimeRecordDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/Payment.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/dto/RecordDto.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/CourtRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/MembershipRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/ParticipantRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/PaymentRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/TimeRecordRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/UserInformationRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/hello/security/MyUserDetailsService.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/js/admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/admin.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/js/javascript.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/javascript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/static/js/reservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/reservation.js" afterDir="false" />
@@ -49,12 +81,14 @@
       <change beforePath="$PROJECT_DIR$/target/classes/templates/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/reservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/reservation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/result.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/templates/userDetail.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/userDetail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/hello/ApplicationTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,8 +99,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -131,20 +165,27 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="403" y="204" key="#com.intellij.refactoring.move.moveInstanceMethod.MoveInstanceMethodDialog/0.0.1280.680@0.0.1280.680" timestamp="1584625451164" />
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1587498539272">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/1920.371.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1587498539272" />
     <state x="441" y="225" key="com.intellij.ide.util.TipDialog" timestamp="1584027007356">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="441" y="225" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1584027007356" />
-    <state x="661" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578594415956" />
-    <state x="411" y="157" key="run.anything.popup" timestamp="1585234523017">
-      <screen x="0" y="0" width="1280" height="680" />
+    <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588016061338">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.371.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1588016061338" />
+    <state x="2331" y="531" key="run.anything.popup" timestamp="1588442024738">
+      <screen x="1920" y="371" width="1280" height="693" />
     </state>
     <state x="411" y="157" key="run.anything.popup/0.0.1280.680@0.0.1280.680" timestamp="1585234523017" />
     <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1582126345368" />
+    <state x="2331" y="531" key="run.anything.popup/1920.371.1280.693/0.0.1920.1040@1920.371.1280.693" timestamp="1588442024738" />
     <state x="415" y="147" width="672" height="444" key="search.everywhere.popup" timestamp="1585234540771">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="415" y="147" width="672" height="444" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1585234540771" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1578595015548" />
   </component>
 </project>

@@ -2,6 +2,12 @@ $(document).ready(function(){
 
 });
 
+var today = new Date();
+var date = ((today.getMonth()+1) < 10 ? "0" + (today.getMonth()+1) : (today.getMonth()+1)) + "/" + today.getDate() + "/" +today.getFullYear();
+
+  document.getElementById("filterdatepicker").value = date;
+
+
 var timetable = new Timetable();
 
 var selectedID;
@@ -87,7 +93,7 @@ function dayChanged() {
     var that = this;
 
     $.ajax({
-        type : "POST",
+        type : "GET",
         url : "http://localhost:8080/api/search",
         data: { filterDay: document.getElementById("filterdatepicker").value},
         success: function(data){
@@ -121,6 +127,10 @@ function onRoleChange(){
                 console.log(data)
                 everyUser = data;
 
+                window.location.href = "http://localhost:8080/admin?success=changed" ;
+
+
+                /*
                 document.getElementById("userRoleChange").innerHTML = "";
                 for(var i = 0; i < everyUser.length; i++){
                     var option = document.createElement("option");
@@ -128,7 +138,7 @@ function onRoleChange(){
                     option.value = everyUser[i].id;
 
                     document.getElementById("userRoleChange").appendChild(option);
-                }
+                }*/
             },
             error: function (err) {
                 console.log(err)
@@ -154,8 +164,13 @@ function onUpdateRecord() {
         reason : document.getElementById("inputReason").value,
         participants : $('#inputParticipants').chosen().val()},
         success: function(data){
-            //console.log(data)
-            window.location.href = "http://localhost:8080/home";
+            if(data==="success"){
+                            window.location.href = "http://localhost:8080/home?success=update";
+                        }else{
+                            var pathId = window.location.href.split("/")[window.location.href.split("/").length-1].split("?")[0];
+
+                            window.location.href = "http://localhost:8080/reservation/" +   pathId + data;
+                        }
         },
         error: function (err) {
             console.log(err)

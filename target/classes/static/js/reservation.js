@@ -26,11 +26,11 @@ function onInit(){
     document.getElementById("inputEndDate").value = endDate.split("-")[1] + "/" + endDate.split("-")[2] + "/" + endDate.split("-")[0]
     document.getElementById("inputEndTime").value = reservation.endDate.split(" ")[1]
 
-    for(var i = 0; i < tennisCourts.length; i++){
+    /*for(var i = 0; i < tennisCourts.length; i++){
         if(tennisCourts[i].id == reservation.courtID){
             reservation.courtID = reservation.courtID + " - " + tennisCourts[i].name
         }
-    }
+    }*/
 
 
     document.getElementById("inputCourt").value = reservation.courtID

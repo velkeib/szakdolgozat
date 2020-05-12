@@ -1,3 +1,10 @@
+
+var today = new Date();
+var date = ((today.getMonth()+1) < 10 ? "0" + (today.getMonth()+1) : (today.getMonth()+1)) + "/" + today.getDate() + "/" +today.getFullYear();
+
+  document.getElementById("filterdatepicker").value = date;
+
+
 var timetable = new Timetable();
 
 timetable.setScope(8,21)
@@ -31,6 +38,7 @@ function setTimeTable(){
   }
   var renderer = new Timetable.Renderer(timetable);
   renderer.draw('.timetable');
+
 }
 
 function setLocations(){
@@ -119,7 +127,7 @@ function dayChanged() {
     var that = this;
 
     $.ajax({
-        type : "POST",
+        type : "GET",
         url : "http://localhost:8080/api/search",
         data: { filterDay: document.getElementById("filterdatepicker").value},
         success: function(data){
@@ -226,11 +234,23 @@ function checkIfFieldsFilled(){
     }
 }
 
-
-
-
-
-
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
 
 
 

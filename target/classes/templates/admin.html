@@ -70,10 +70,7 @@ $( "#inputEndTime" ).timepicker({
             <form action="userdetail" class="form-inline ml-2 mt-2 mt-md-0">
                 <a class="btn btn-outline-light my-2 my-sm-0" href="userdetail" role="button" th:text="${authenticatedUser.firstName + ' ' + authenticatedUser.lastName}"></a>
             </form>
-            <form action="login" class="form-inline ml-2 mt-2 mt-md-0">
-                <button class="btn btn-outline-light my-2 my-sm-0">Sign in</button>
-            </form>
-            <form class="form-inline mt-2 ml-2 mt-md-0">
+            <form class="form-inline mt-2 ml-2 mt-md-0"  th:action="@{/logout}">
                 <button class="btn btn-outline-light my-2 my-sm-0" onclick="fireLogout()">Logout</button>
             </form>
         </div>
@@ -84,7 +81,6 @@ $( "#inputEndTime" ).timepicker({
     <p class="lead">This is the administrator page. The administrators can update the user roles, modify or delete the reservations.</p>
 </div>
 <div class="container">
-
     <div class="row" th:if="${notAdmin != ''}">
         <div class="alert alert-danger col-md-12">
             <strong>Error!</strong> <span th:text="${notAdmin}"></span>
@@ -95,6 +91,9 @@ $( "#inputEndTime" ).timepicker({
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Change user role</span>
             </h4>
+            <div th:if="${success != ''}" class="alert alert-success col-md-12">
+                <strong>Success!</strong> <span th:text="${success}"></span>
+            </div>
             <div class="row mt-2">
                 <label for="userRoleChange">User</label>
                 <select class="custom-select" id="userRoleChange">
@@ -186,16 +185,7 @@ $( "#inputEndTime" ).timepicker({
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col col-md-5">
-        </div>
-        <div class="col col-md-2">
-            <input type="text" class="form-control" id="filterdatepicker" onchange="dayChanged()">
-        </div>
-        <div class="col col-md-5">
-        </div>
-    </div>
+<div class="container-fluid" th:if="${notAdmin == ''}">
     <div class="row">
         <div class="col-md-2 mb-3">
         </div>
@@ -203,6 +193,16 @@ $( "#inputEndTime" ).timepicker({
             <div class="timetable"></div>
         </div>
         <div class="col-md-2 mb-3">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-md-5">
+        </div>
+        <div class="col col-md-2">
+            <label for="filterdatepicker">Timetable selected date</label>
+            <input type="text" class="form-control" id="filterdatepicker" onchange="dayChanged()">
+        </div>
+        <div class="col col-md-5">
         </div>
     </div>
 </div>
